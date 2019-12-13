@@ -64,7 +64,7 @@ class P2SH {
   void _getDataFromHash() {
     if (data.address == null) {
       final payload = new Uint8List(21);
-      payload.buffer.asByteData().setUint8(0, network.pubKeyHash);
+      payload.buffer.asByteData().setUint8(0, network.scriptHash);
       payload.setRange(1, payload.length, data.hash);
       data.address = bs58check.encode(payload);
     }
@@ -80,7 +80,7 @@ class P2SH {
   void _getDataFromAddress(String address) {
     Uint8List payload = bs58check.decode(address);
     final version = payload.buffer.asByteData().getUint8(0);
-    if (version != network.pubKeyHash)
+    if (version != network.scriptHash)
       throw new ArgumentError('Invalid version or Network mismatch');
     data.hash = payload.sublist(1);
     if (data.hash.length != 20) throw new ArgumentError('Invalid address');
