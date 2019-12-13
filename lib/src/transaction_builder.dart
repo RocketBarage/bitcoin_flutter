@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'package:hex/hex.dart';
 import 'package:bs58check/bs58check.dart' as bs58check;
+import 'payments/p2sh.dart';
 import 'utils/script.dart' as bscript;
 import 'ecpair.dart';
 import 'models/networks.dart';
@@ -281,9 +282,13 @@ Uint8List addressToOutputScript(String address, [NetworkType nw]) {
   final payload = bs58check.decode(address);
   if (payload.length < 21) throw new ArgumentError(address + ' is too short');
   if (payload.length > 21) throw new ArgumentError(address + ' is too long');
-  P2PKH p2pkh =
-      new P2PKH(data: new P2PKHData(address: address), network: network);
-  return p2pkh.data.output;
+  if(address[0] == '3') {
+    P2SH p2sh = new P2SH(data: new P2SHData(address: address), network: network);
+    return p2sh.data.output;
+  } else {
+    P2PKH p2pkh = new P2PKH(data: new P2PKHData(address: address), network: network);
+    return p2pkh.data.output;
+  }
 }
 
 Uint8List pubkeyToOutputScript(Uint8List pubkey, [NetworkType nw]) {
