@@ -3,7 +3,7 @@ import 'package:bitcoin_flutter/src/payments/p2pkh.dart';
 import 'package:test/test.dart';
 import 'package:hex/hex.dart';
 import 'package:bip39/bip39.dart' as bip39;
-import 'package:bip32/bip32.dart' as bip32;
+import 'package:bip32_custom/bip32.dart' as bip32;
 void main() {
   group('bitcoin-dart (BIP32)', () {
     test('can import a BIP32 testnet xpriv and export to WIF', () {

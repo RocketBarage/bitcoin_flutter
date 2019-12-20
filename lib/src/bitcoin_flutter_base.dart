@@ -2,7 +2,7 @@
 import 'dart:typed_data';
 import 'package:bitcoin_flutter/src/utils/magic_hash.dart';
 import 'package:hex/hex.dart';
-import 'package:bip32/bip32.dart' as bip32;
+import 'package:bip32_custom/bip32.dart' as bip32;
 import 'models/networks.dart';
 import 'payments/p2pkh.dart';
 import 'ecpair.dart';
